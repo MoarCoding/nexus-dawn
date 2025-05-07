@@ -66,10 +66,9 @@ const OpponentSelect = () => {
 						<Button
 							label="Rejoin"
 							path="/battle"
-							type="link"
 						/>
 						<Button
-							label="Forefeit"
+							label="Forfeit"
 							onClick={() => forfeitBattle()}
 						/>
 					</div>

@@ -14,9 +14,10 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
-
 import { mount } from 'cypress/react'
+import 'react-toastify/dist/ReactToastify.css'
+import '../../app/setup'
+import './commands'
 
 // Augment the Cypress namespace to include type definitions for
 // your custom command.
