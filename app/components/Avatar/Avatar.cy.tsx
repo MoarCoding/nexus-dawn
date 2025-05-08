@@ -4,18 +4,15 @@ import Avatar from './Avatar'
 describe('<Avatar />', () => {
   const imgUrl = 'url.to.som.image'
 
-	beforeEach(() => {
-		// Stub the Zustand store to return a user
-		useUserStore.setState({
+	it('renders the avatar with user data', () => {
+    useUserStore.setState({
 			user: {
 				image: imgUrl,
 				level: 5,
 				color: '#ff0000'
 			}
 		})
-	})
-
-	it('renders the avatar with user data', () => {
+    
 		cy.mount(<Avatar levelShowing={true} />)
 
 		// Assert that the avatar image is rendered
