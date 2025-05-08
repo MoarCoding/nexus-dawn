@@ -2,17 +2,17 @@ import { useUserStore } from '@stores'
 import Avatar from './Avatar'
 
 describe('<Avatar />', () => {
-  const imgUrl = 'url.to.som.image'
+	const imgUrl = 'url.to.som.image'
 
 	it('renders the avatar with user data', () => {
-    useUserStore.setState({
+		useUserStore.setState({
 			user: {
 				image: imgUrl,
 				level: 5,
 				color: '#ff0000'
 			}
 		})
-    
+
 		cy.mount(<Avatar levelShowing={true} />)
 
 		// Assert that the avatar image is rendered
