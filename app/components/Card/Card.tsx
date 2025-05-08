@@ -26,10 +26,7 @@ const Card = ({
 	handleClick,
 	setCardDragged
 }: CardProps) => {
-	const { captured, color, _id, image, values } = card || {}
-
-	const defaultColor = `rgb(3, 48, 59)`
-
+	const { captured, color = 'rgb(3, 48, 59)', _id, image, values } = card || {}
 	const cardClasses = classSet(
 		'card',
 		captured ? 'captured' : '',
@@ -50,7 +47,7 @@ const Card = ({
 		// Position the drag image at the center of the mouse cursor
 		const offsetX = e.clientX - targetElement.getBoundingClientRect().left
 		const offsetY = e.clientY - targetElement.getBoundingClientRect().top
-		e.dataTransfer.setDragImage(dragImage, offsetX, offsetY)
+		e.dataTransfer?.setDragImage(dragImage, offsetX, offsetY)
 	}
 
 	const handleDragEnd = () => {
@@ -65,22 +62,45 @@ const Card = ({
 			onClick={(e) => handleClick?.(e, card)}
 			onDragStart={(e) => handleDragStart(e, card)}
 			onDragEnd={() => handleDragEnd()}
+			data-cy="card"
 		>
 			<div
 				className="card__side card__front fill"
-				style={{ background: color || defaultColor }}
+				style={{ background: color }}
 				ref={dragImageRef}
+				data-cy="card-front"
 			>
 				<img
 					className="card__image fill"
 					src={image}
 					alt={_id}
+					data-cy="card-image-front"
 				/>
 				<div className="card__values">
-					<span className="up center">{values[0]}</span>
-					<span className="right center">{values[1]}</span>
-					<span className="down center">{values[2]}</span>
-					<span className="left center">{values[3]}</span>
+					<span
+						className="up center"
+						data-cy="up"
+					>
+						{values?.[0]}
+					</span>
+					<span
+						className="right center"
+						data-cy="right"
+					>
+						{values?.[1]}
+					</span>
+					<span
+						className="down center"
+						data-cy="down"
+					>
+						{values?.[2]}
+					</span>
+					<span
+						className="left center"
+						data-cy="left"
+					>
+						{values?.[3]}
+					</span>
 				</div>
 			</div>
 			<div className="card__side card__back fill">
