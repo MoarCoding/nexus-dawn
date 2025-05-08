@@ -3,8 +3,8 @@ import { User } from '@interfaces'
 import { useUserStore } from '@stores'
 import { classSet } from '@utils'
 
-import { AvatarMenu } from './components'
 import './avatar.scss'
+import { AvatarMenu } from './components'
 
 // Renders user image avatar
 // levelShowing: Indicates whether the user's level should be displayed
@@ -19,7 +19,6 @@ const Avatar = ({
 }) => {
 	const user = useUserStore((state) => state.user)
 	const { image, level } = (user as User) ?? {}
-
 	const [isOpen, toggleIsOpen] = useToggle(false)
 
 	const handleClick = () => {
