@@ -1,4 +1,3 @@
-import { User } from '@interfaces'
 import { GiAbstract005 } from '@react-icons/all-files/gi/GiAbstract005'
 import { GiAbstract021 } from '@react-icons/all-files/gi/GiAbstract021'
 import { GiAbstract062 } from '@react-icons/all-files/gi/GiAbstract062'
@@ -6,6 +5,8 @@ import { GiAbstract088 } from '@react-icons/all-files/gi/GiAbstract088'
 import { GiAbstract112 } from '@react-icons/all-files/gi/GiAbstract112'
 import { GiAbstract116 } from '@react-icons/all-files/gi/GiAbstract116'
 import { GiAbstract120 } from '@react-icons/all-files/gi/GiAbstract120'
+
+import { User } from '@interfaces'
 import { classSet } from '@utils'
 
 export const maxValues = {

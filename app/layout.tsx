@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { ToastContainer } from 'react-toastify'
+
 import ClientLayout from './client-layout'
 import './setup'
 

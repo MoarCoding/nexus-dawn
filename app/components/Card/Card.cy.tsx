@@ -1,6 +1,6 @@
-import React from 'react'
-import Card from './Card'
 import { ICard } from '@interfaces'
+
+import Card from './Card'
 
 describe('<Card />', () => {
 	const mockCard: ICard = {
@@ -10,7 +10,8 @@ describe('<Card />', () => {
 		values: [5, 6, 7, 8],
 		rarity: 'Common',
 		color: 'red',
-		captured: false
+		captured: false,
+		number: 1
 	}
 
 	it('renders with basic props', () => {
@@ -125,11 +126,11 @@ describe('<Card />', () => {
 	})
 
 	it('handles null or undefined card gracefully', () => {
-		// @ts-ignore - Intentionally testing with invalid props
+		// @ts-expect-error - Intentionally testing with invalid props
 		cy.mount(<Card card={null} />)
 		cy.getDataCy('card').should('exist')
 
-		// @ts-ignore - Intentionally testing with invalid props
+		// @ts-expect-error - Intentionally testing with invalid props
 		cy.mount(<Card card={undefined} />)
 		cy.getDataCy('card').should('exist')
 	})

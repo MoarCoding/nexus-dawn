@@ -1,4 +1,5 @@
 import { useUserStore } from '@stores'
+
 import Avatar from './Avatar'
 
 describe('<Avatar />', () => {
@@ -6,6 +7,7 @@ describe('<Avatar />', () => {
 
 	it('renders the avatar with user data', () => {
 		useUserStore.setState({
+			// @ts-expect-error - Only include bare minimum properties for the test
 			user: {
 				image: imgUrl,
 				level: 5,
