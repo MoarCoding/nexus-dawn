@@ -1,4 +1,3 @@
-import * as apiModule from '@api'
 import { ICard } from '@interfaces'
 import { useUserStore } from '@stores'
 import CheckBox from './CheckBox'
@@ -21,10 +20,6 @@ describe('<CheckBox />', () => {
 	}
 
 	beforeEach(() => {
-		// Stub the API calls
-		cy.stub(apiModule, 'addCardToDeck').as('addCardToDeck').resolves()
-		cy.stub(apiModule, 'removeCardFromDeck').as('removeCardFromDeck').resolves()
-
 		// Set up the user store
 		useUserStore.setState({
 			userCards: [mockCard],
@@ -50,17 +45,24 @@ describe('<CheckBox />', () => {
 		cy.getDataCy('checkbox-unchecked').should('not.exist')
 	})
 
-	it.only('adds card to deck when clicked and card is not selected', () => {
+	it('adds card to deck when clicked and card is not selected', () => {
+		const api = window.api
+
+		cy.stub(api, 'addCardToDeck').as('addCardToDeck').resolves()
+
 		cy.mount(<CheckBox card={mockCard} />)
 
 		cy.getDataCy('checkbox').click()
-
 		cy.get('@addCardToDeck').should('have.been.calledWith', mockCard)
 		cy.get('@fetchUserCards').should('have.been.called')
 		cy.get('@fetchUserDeck').should('have.been.called')
 	})
 
 	it('removes card from deck when clicked and card is selected', () => {
+		const api = window.api
+
+		cy.stub(api, 'removeCardFromDeck').as('removeCardFromDeck').resolves()
+
 		cy.mount(<CheckBox card={mockSelectedCard} />)
 
 		cy.getDataCy('checkbox').click()
@@ -78,7 +80,9 @@ describe('<CheckBox />', () => {
 			fetchUserDeck: cy.stub().as('fetchUserDeck')
 		})
 
-		// Stub window.alert
+		const api = window.api
+
+		cy.stub(api, 'addCardToDeck').as('addCardToDeck').resolves()
 		cy.stub(window, 'alert').as('alertStub')
 
 		cy.mount(<CheckBox card={mockCard} />)
