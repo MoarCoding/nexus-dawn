@@ -1,5 +1,6 @@
 import { ICard } from '@interfaces'
 import { useUserStore } from '@stores'
+
 import CheckBox from './CheckBox'
 
 describe('<CheckBox />', () => {

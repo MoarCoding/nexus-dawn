@@ -42,6 +42,7 @@ describe('<Button />', () => {
 		cy.get('button').click()
 
 		cy.get('@router:push').should((mock) => {
+			// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 			expect(mock).to.have.been.calledOnce
 		})
 	})
