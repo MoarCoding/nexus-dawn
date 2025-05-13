@@ -43,10 +43,15 @@ describe('<CheckBox />', () => {
 		cy.getDataCy('checkbox-unchecked').should('not.exist')
 	})
 
-	it('adds card to deck when clicked and card is not selected', () => {
+	it.only('adds card to deck when clicked and card is not selected', () => {
+		cy.mount(<CheckBox card={mockCard} />)
+
+		cy.wait(0) // Wait for the component to mount
+
+		cy.log('Cypress API:', window.api)
 		const api = window.api
 		cy.stub(api, 'addCardToDeck').as('addCardToDeck').resolves()
-		cy.mount(<CheckBox card={mockCard} />)
+
 		cy.getDataCy('checkbox').click()
 		cy.get('@addCardToDeck').should('have.been.calledWith', mockCard)
 		cy.get('@fetchUserCards').should('have.been.called')
@@ -54,11 +59,15 @@ describe('<CheckBox />', () => {
 	})
 
 	it('removes card from deck when clicked and card is selected', () => {
+		cy.mount(<CheckBox card={mockSelectedCard} />)
+		cy.wait(0) // Wait for the component to mount
+
+		cy.getDataCy('checkbox').click()
+
 		const api = window.api
 
 		cy.stub(api, 'removeCardFromDeck').as('removeCardFromDeck').resolves()
-		cy.mount(<CheckBox card={mockSelectedCard} />)
-		cy.getDataCy('checkbox').click()
+
 		cy.get('@removeCardFromDeck').should('have.been.calledWith', mockSelectedCard)
 		cy.get('@fetchUserCards').should('have.been.called')
 		cy.get('@fetchUserDeck').should('have.been.called')
@@ -73,11 +82,13 @@ describe('<CheckBox />', () => {
 			fetchUserDeck: cy.stub().as('fetchUserDeck')
 		})
 
+		cy.mount(<CheckBox card={mockCard} />)
+
 		const api = window.api
 
 		cy.stub(api, 'addCardToDeck').as('addCardToDeck').resolves()
 		cy.stub(window, 'alert').as('alertStub')
-		cy.mount(<CheckBox card={mockCard} />)
+
 		cy.getDataCy('checkbox').click()
 		// Check the alert was called
 		cy.get('@alertStub').should('have.been.calledWith', 'Your deck is currently full')
