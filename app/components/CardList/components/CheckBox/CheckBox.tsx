@@ -6,6 +6,7 @@ import { ICard } from '@interfaces'
 import { useUserStore } from '@stores'
 import './checkBox.scss'
 
+/*
 declare global {
 	interface Window {
 		api: typeof api
@@ -14,12 +15,12 @@ declare global {
 const isTestMode = !!window && !!window.Cypress
 if (isTestMode) {
 	window.api = { ...api }
-}
+} */
 interface CheckBoxProps {
 	card: ICard
 }
 const CheckBox = ({ card }: CheckBoxProps) => {
-	const { addCardToDeck, removeCardFromDeck } = isTestMode ? window.api : api
+	const { addCardToDeck, removeCardFromDeck } = api //isTestMode ? window.api : api
 	const userCards = useUserStore((state) => state.userCards)
 	const userDeck = useUserStore((state) => state.userDeck)
 	const fetchUserCards = useUserStore((state) => state.fetchUserCards)
