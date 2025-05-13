@@ -1,11 +1,9 @@
 import { ImCheckboxChecked } from '@react-icons/all-files/im/ImCheckboxChecked'
 import { ImCheckboxUnchecked } from '@react-icons/all-files/im/ImCheckboxUnchecked'
-import { useEffect } from 'react'
 
 import * as api from '@api'
 import { ICard } from '@interfaces'
 import { useUserStore } from '@stores'
-
 import './checkBox.scss'
 
 declare global {
@@ -13,25 +11,19 @@ declare global {
 		api: typeof api
 	}
 }
-
+const isTestMode = window && window.Cypress
+if (isTestMode) {
+	window.api = { ...api }
+}
 interface CheckBoxProps {
 	card: ICard
 }
 const CheckBox = ({ card }: CheckBoxProps) => {
-	let { addCardToDeck, removeCardFromDeck } = api
+	const { addCardToDeck, removeCardFromDeck } = isTestMode ? window.api : api
 	const userCards = useUserStore((state) => state.userCards)
 	const userDeck = useUserStore((state) => state.userDeck)
 	const fetchUserCards = useUserStore((state) => state.fetchUserCards)
 	const fetchUserDeck = useUserStore((state) => state.fetchUserDeck)
-
-	useEffect(() => {
-		if (window && window.Cypress) {
-			window.api = { ...api }
-			addCardToDeck = window.api.addCardToDeck
-			removeCardFromDeck = window.api.removeCardFromDeck
-		}
-	}, [])
-
 	// Selects and adds a single card to the user's deck
 	const addToDeck = async (card: ICard) => {
 		let errorDisplayed = false
