@@ -1,3 +1,5 @@
+'use client'
+
 import { ImCheckboxChecked } from '@react-icons/all-files/im/ImCheckboxChecked'
 import { ImCheckboxUnchecked } from '@react-icons/all-files/im/ImCheckboxUnchecked'
 
