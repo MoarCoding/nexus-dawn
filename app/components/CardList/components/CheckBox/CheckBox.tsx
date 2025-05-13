@@ -1,10 +1,11 @@
 import { ImCheckboxChecked } from '@react-icons/all-files/im/ImCheckboxChecked'
 import { ImCheckboxUnchecked } from '@react-icons/all-files/im/ImCheckboxUnchecked'
+import { useEffect } from 'react'
 
 import * as api from '@api'
 import { ICard } from '@interfaces'
 import { useUserStore } from '@stores'
-import { useEffect } from 'react'
+
 import './checkBox.scss'
 
 declare global {
