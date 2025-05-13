@@ -11,7 +11,7 @@ declare global {
 		api: typeof api
 	}
 }
-const isTestMode = window && window.Cypress
+const isTestMode = !!window && !!window.Cypress
 if (isTestMode) {
 	window.api = { ...api }
 }
